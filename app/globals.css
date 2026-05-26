@@ -2,7 +2,7 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #0a1628;
+  --foreground: #0a0a0a;
 }
 
 @theme inline {
@@ -51,3 +51,15 @@ html {
 .delay-300 { animation-delay: 0.3s; }
 .delay-400 { animation-delay: 0.4s; }
 .delay-500 { animation-delay: 0.5s; }
+
+/* Scroll-triggered slide-in for all sections */
+.js-animate section {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.65s ease, transform 0.65s ease;
+}
+
+.js-animate section.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}

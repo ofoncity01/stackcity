@@ -64,21 +64,21 @@ const socials = [
 
 export default function Footer() {
   return (
-    <footer className="bg-slate-900 text-slate-400">
+    <footer className="bg-black text-zinc-400">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
         {/* Top row */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-12 border-b border-slate-800">
+        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-10 pb-12 border-b border-zinc-800">
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <a href="#home" className="flex items-center gap-2 mb-4 group w-fit">
-              <div className="w-9 h-9 bg-blue-900 rounded-lg flex items-center justify-center group-hover:bg-orange-500 transition-colors">
-                <Building2 className="w-5 h-5 text-white" />
+              <div className="w-9 h-9 bg-zinc-900 rounded-lg flex items-center justify-center group-hover:bg-yellow-400 transition-colors">
+                <Building2 className="w-5 h-5 text-white group-hover:text-black" />
               </div>
               <span className="text-xl font-bold text-white">
-                City<span className="text-orange-500">Stack</span>
+                City<span className="text-yellow-400">Stack</span>
               </span>
             </a>
-            <p className="text-sm leading-relaxed text-slate-400 mb-6 max-w-xs">
+            <p className="text-sm leading-relaxed text-zinc-400 mb-6 max-w-xs">
               The premier contract offer platform connecting businesses with top-tier contractors
               across Nigeria and beyond.
             </p>
@@ -89,7 +89,7 @@ export default function Footer() {
                   key={label}
                   href={href}
                   aria-label={label}
-                  className="w-9 h-9 rounded-lg bg-slate-800 hover:bg-blue-900 text-slate-400 hover:text-white flex items-center justify-center transition-colors duration-200"
+                  className="w-9 h-9 rounded-lg bg-zinc-800 hover:bg-purple-900 text-zinc-400 hover:text-white flex items-center justify-center transition-colors duration-200"
                 >
                   {svg}
                 </a>
@@ -106,7 +106,7 @@ export default function Footer() {
                   <li key={label}>
                     <a
                       href={href}
-                      className="text-sm hover:text-orange-400 transition-colors duration-200"
+                      className="text-sm hover:text-yellow-400 transition-colors duration-200"
                     >
                       {label}
                     </a>
@@ -118,7 +118,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom row */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
           <p>© {new Date().getFullYear()} CityStack Technologies Ltd. All rights reserved.</p>
           <p>Built with ❤️ in Lagos, Nigeria</p>
         </div>

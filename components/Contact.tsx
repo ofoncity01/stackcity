@@ -43,7 +43,7 @@ export default function Contact() {
     setError("");
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!form.name || !form.email || !form.message) {
       setError("Please fill in all required fields.");
@@ -54,7 +54,6 @@ export default function Contact() {
       return;
     }
     setLoading(true);
-    // Simulate form submission
     await new Promise((r) => setTimeout(r, 1500));
     setLoading(false);
     setSubmitted(true);
@@ -65,52 +64,65 @@ export default function Contact() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center max-w-2xl mx-auto mb-16">
-          <span className="inline-block text-xs font-bold uppercase tracking-widest text-orange-500 bg-orange-50 border border-orange-200 px-4 py-1.5 rounded-full mb-4">
+          <span className="inline-block text-xs font-bold uppercase tracking-widest text-yellow-600 bg-yellow-50 border border-yellow-200 px-4 py-1.5 rounded-full mb-4">
             Contact Us
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 leading-tight mb-4">
+          <h2 className="text-3xl sm:text-4xl font-extrabold text-zinc-900 leading-tight mb-4">
             Ready to Find Your{" "}
-            <span className="text-blue-900">Perfect Contractor?</span>
+            <span className="text-purple-900">Perfect Contractor?</span>
           </h2>
-          <p className="text-slate-500 text-lg leading-relaxed">
+          <p className="text-zinc-500 text-lg leading-relaxed">
             Fill out the form below and our team will reach out within 24 hours
             to discuss your project and match you with the right contractors.
           </p>
         </div>
 
         <div className="grid lg:grid-cols-5 gap-12">
-          {/* Contact info */}
-          <div className="lg:col-span-2 flex flex-col gap-8">
-            <div className="bg-linear-to-br from-blue-900 to-blue-950 rounded-2xl p-8 text-white flex-1">
-              <h3 className="font-bold text-xl mb-2">Get in Touch</h3>
-              <p className="text-blue-200 text-sm mb-8 leading-relaxed">
-                Have a question or ready to post your first contract? Our team
-                is standing by to help you succeed.
-              </p>
-              <div className="space-y-5">
-                {contactInfo.map(({ icon: Icon, label, value, href }) => (
-                  <div key={label} className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                      <Icon className="w-5 h-5 text-orange-400" />
-                    </div>
-                    <div>
-                      <p className="text-blue-300 text-xs font-medium mb-0.5">{label}</p>
-                      <a
-                        href={href}
-                        className="text-white text-sm font-medium hover:text-orange-300 transition-colors"
-                      >
-                        {value}
-                      </a>
-                    </div>
-                  </div>
-                ))}
-              </div>
+          {/* Contact info — redesigned left side */}
+          <div className="lg:col-span-2 flex flex-col gap-6">
 
-              {/* Office hours */}
-              <div className="mt-8 pt-6 border-t border-white/10">
-                <p className="text-blue-300 text-xs font-medium uppercase tracking-wider mb-3">Office Hours</p>
-                <p className="text-white text-sm">Mon – Fri: 8:00 AM – 6:00 PM</p>
-                <p className="text-blue-300 text-xs mt-1">WAT (West Africa Time)</p>
+            {/* Heading */}
+            <div>
+              <span className="inline-block text-xs font-bold uppercase tracking-widest text-yellow-600 bg-yellow-50 border border-yellow-200 px-3 py-1 rounded-full mb-4">
+                Let's Talk
+              </span>
+              <h3 className="text-2xl font-extrabold text-zinc-900 leading-snug mb-3">
+                Start a Conversation
+              </h3>
+              <p className="text-zinc-500 text-sm leading-relaxed">
+                Whether you have a project in mind or just want to learn more, we'd love to hear from you.
+              </p>
+            </div>
+
+            {/* Contact item cards */}
+            <div className="flex flex-col gap-3">
+              {contactInfo.map(({ icon: Icon, label, value }) => (
+                <div
+                  key={label}
+                  className="flex items-center gap-4 p-4 rounded-2xl border border-zinc-100 bg-zinc-50"
+                >
+                  <div className="w-11 h-11 rounded-xl bg-zinc-900 flex items-center justify-center shrink-0">
+                    <Icon className="w-5 h-5 text-yellow-400" />
+                  </div>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-xs text-zinc-400 font-medium mb-0.5">{label}</p>
+                    <p className="text-zinc-900 text-sm font-semibold truncate">{value}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Bottom two-col info blocks */}
+            <div className="grid grid-cols-2 gap-3">
+              <div className="bg-purple-900 rounded-2xl p-5">
+                <p className="text-purple-300 text-xs font-semibold uppercase tracking-wider mb-2">Response Time</p>
+                <p className="text-white font-extrabold text-xl leading-none mb-1">24h</p>
+                <p className="text-purple-300 text-xs">Business days only</p>
+              </div>
+              <div className="bg-zinc-900 rounded-2xl p-5">
+                <p className="text-zinc-400 text-xs font-semibold uppercase tracking-wider mb-2">Office Hours</p>
+                <p className="text-white font-bold text-sm leading-snug">Mon to Fri</p>
+                <p className="text-zinc-400 text-xs mt-1">8 AM – 6 PM WAT</p>
               </div>
             </div>
           </div>
@@ -118,17 +130,17 @@ export default function Contact() {
           {/* Form */}
           <div className="lg:col-span-3">
             {submitted ? (
-              <div className="h-full flex flex-col items-center justify-center text-center py-16 px-8 bg-slate-50 rounded-2xl border border-slate-100">
+              <div className="h-full flex flex-col items-center justify-center text-center py-16 px-8 bg-zinc-50 rounded-2xl border border-zinc-100">
                 <div className="w-16 h-16 rounded-full bg-green-100 flex items-center justify-center mb-5">
                   <CheckCircle className="w-8 h-8 text-green-600" />
                 </div>
-                <h3 className="text-slate-900 font-bold text-xl mb-2">Message Sent!</h3>
-                <p className="text-slate-500 text-sm max-w-xs leading-relaxed">
+                <h3 className="text-zinc-900 font-bold text-xl mb-2">Message Sent!</h3>
+                <p className="text-zinc-500 text-sm max-w-xs leading-relaxed">
                   Thank you for reaching out. Our team will get back to you within 24 hours.
                 </p>
                 <button
                   onClick={() => { setSubmitted(false); setForm({ name: "", email: "", company: "", service: "", message: "" }); }}
-                  className="mt-6 text-blue-900 text-sm font-semibold hover:text-orange-500 transition-colors"
+                  className="mt-6 text-purple-900 text-sm font-semibold hover:text-yellow-500 transition-colors"
                 >
                   Send Another Message
                 </button>
@@ -137,8 +149,8 @@ export default function Contact() {
               <form onSubmit={handleSubmit} noValidate className="space-y-5">
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                      Full Name <span className="text-orange-500">*</span>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                      Full Name <span className="text-yellow-500">*</span>
                     </label>
                     <input
                       type="text"
@@ -146,12 +158,12 @@ export default function Contact() {
                       value={form.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/10 outline-none text-sm text-slate-900 placeholder-slate-400 transition"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:border-purple-900 focus:ring-2 focus:ring-purple-900/10 outline-none text-sm text-zinc-900 placeholder-zinc-400 transition"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                      Email Address <span className="text-orange-500">*</span>
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                      Email Address <span className="text-yellow-500">*</span>
                     </label>
                     <input
                       type="email"
@@ -159,14 +171,14 @@ export default function Contact() {
                       value={form.email}
                       onChange={handleChange}
                       placeholder="john@company.com"
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/10 outline-none text-sm text-slate-900 placeholder-slate-400 transition"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:border-purple-900 focus:ring-2 focus:ring-purple-900/10 outline-none text-sm text-zinc-900 placeholder-zinc-400 transition"
                     />
                   </div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-5">
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
                       Company Name
                     </label>
                     <input
@@ -175,18 +187,18 @@ export default function Contact() {
                       value={form.company}
                       onChange={handleChange}
                       placeholder="Your Company Ltd."
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/10 outline-none text-sm text-slate-900 placeholder-slate-400 transition"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:border-purple-900 focus:ring-2 focus:ring-purple-900/10 outline-none text-sm text-zinc-900 placeholder-zinc-400 transition"
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-semibold text-slate-700 mb-1.5">
+                    <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
                       Service Needed
                     </label>
                     <select
                       name="service"
                       value={form.service}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/10 outline-none text-sm text-slate-900 transition bg-white"
+                      className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:border-purple-900 focus:ring-2 focus:ring-purple-900/10 outline-none text-sm text-zinc-900 transition bg-white"
                     >
                       <option value="">Select a service...</option>
                       <option>Construction & Civil</option>
@@ -200,8 +212,8 @@ export default function Contact() {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-semibold text-slate-700 mb-1.5">
-                    Project Details <span className="text-orange-500">*</span>
+                  <label className="block text-xs font-semibold text-zinc-700 mb-1.5">
+                    Project Details <span className="text-yellow-500">*</span>
                   </label>
                   <textarea
                     name="message"
@@ -209,7 +221,7 @@ export default function Contact() {
                     onChange={handleChange}
                     rows={5}
                     placeholder="Describe your project requirements, timeline, and budget..."
-                    className="w-full px-4 py-3 rounded-xl border border-slate-200 focus:border-blue-900 focus:ring-2 focus:ring-blue-900/10 outline-none text-sm text-slate-900 placeholder-slate-400 transition resize-none"
+                    className="w-full px-4 py-3 rounded-xl border border-zinc-200 focus:border-purple-900 focus:ring-2 focus:ring-purple-900/10 outline-none text-sm text-zinc-900 placeholder-zinc-400 transition resize-none"
                   />
                 </div>
 
@@ -222,7 +234,7 @@ export default function Contact() {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 bg-blue-900 hover:bg-blue-800 disabled:bg-slate-300 text-white font-semibold rounded-xl transition-all duration-200 shadow-md shadow-blue-900/25 hover:-translate-y-0.5 disabled:translate-y-0 disabled:shadow-none"
+                  className="w-full flex items-center justify-center gap-2.5 px-6 py-3.5 bg-purple-900 hover:bg-purple-800 disabled:bg-zinc-300 text-white font-semibold rounded-xl transition-all duration-200 shadow-md shadow-purple-900/25 hover:-translate-y-0.5 disabled:translate-y-0 disabled:shadow-none"
                 >
                   {loading ? (
                     <>
